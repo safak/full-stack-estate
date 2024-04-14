@@ -38,17 +38,19 @@ function Slider({ images }) {
           </div>
         </div>
       )}
-      <div className="bigImage">
+     <div className="bigImage">
         <img src={images[0]} alt="" onClick={() => setImageIndex(0)} />
       </div>
       <div className="smallImages">
-        {images.slice(1).map((image, index) => (
-          <img
-            src={image}
-            alt=""
+        {images.slice(1, 4).map((image, index) => (
+          <div
+            className={`imageContainer ${index+1 === 3 ? "blur" : ""}`}
             key={index}
-            onClick={() => setImageIndex(index + 1)}
-          />
+          > 
+            {index+1 === 3 && <div className="blurOverlay"onClick={() => setImageIndex(3)}></div>}
+            <img src={image} alt="" onClick={() => setImageIndex(index + 1)} />
+            {index+1 === 3 && <span>+{images.length - 3}</span>}
+          </div>
         ))}
       </div>
     </div>
