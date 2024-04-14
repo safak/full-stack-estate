@@ -99,5 +99,48 @@
         height: 80px;
       }
     }
+    .imageContainer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      img {
+        height: 100px;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+
+        @include sm {
+          height: 80px;
+        }
+      }
+
+      .blurOverlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        z-index: 1;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight: bold;
+        z-index: 2;
+      }
+
+      &.blur {
+        img {
+          opacity: 1;
+        }
+      }
+    }
   }
 }
