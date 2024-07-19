@@ -6,6 +6,19 @@ export const register = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { username: username },
+          { email: email }
+        ]
+      }
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username or email already exists' });
+    }
     // HASH THE PASSWORD
 
     const hashedPassword = await bcrypt.hash(password, 10);
